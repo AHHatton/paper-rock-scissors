@@ -10,22 +10,76 @@
 
   <script>
    
-   //function getComputerChoice randomly returns R, P, S using Math.random, console.log return
+   //declares score variables at global scope
+   let humanScore = 0;
+   let computerScore = 0;
 
-   //function getHumanChoice prompts for R, P, S but doesn't validate response, assumes good response, console.log return
+   //uses math.random to pick a random number, then uses  conditional logic to convert it to r/p/s
+   function getComputerChoice() {
+    let num = Math.random();
+    let computerInput = "";
+    if (num <.32) {
+      computerInput = "Paper";
+    } else if (num >.66) {
+      computerInput =  "Rock";
+    } else {
+      computerInput = "Scissors";
+    }
+    return computerInput;
+   }
 
-   //variables humanScore and computerScore global, value = 0
+  
+  //prompts for user to input r/p/s
+  function getHumanChoice(){
+    userInput = prompt("Please enter either Paper, Rock, or Scissors");
+    return userInput;
+  }
 
-   //single round logic function playRound(humanChoice, computerChoice).... etc
+//stuck here- attempts to loop through playRound 5 times and increment scores. playRound works on its own, but not in this loop. Scores are wonky at best.
 
-   //full game logic function playGame calls playRound- 5 rounds with scores tracked, winner at end.
+  function playGame() {
+
+    function playRound(humanChoice, computerChoice) {
+      if ((humanChoice === "Paper" && computerChoice === "Rock") || 
+        (humanChoice === "Rock" && computerChoice === "Scissors") ||
+        (humanChoice === "Scissors" && computerChoice === "Paper"))  {
+        humanScore = humanScore + 1;
+        console.log(`You win! ${humanChoice} beats ${computerChoice}`);
+      } else if (humanChoice === computerChoice) {
+        console.log("It's a draw");
+      }
+      else {
+        computerScore = computerScore + 1;
+        console.log(`You lose! ${computerChoice} beats ${humanChoice}`);  
+      }  
+      }
+
+    for (let i = 0; i < 5; i++) {  
+    const humanSelection = getHumanChoice();
+      const computerSelection = getComputerChoice();
+          
+  
+  playRound(humanSelection, computerSelection);
+      
+
+      console.log(`The user played: ${humanSelection}`);
+      console.log(`The computer played: ${computerSelection}`);
+      console.log(`The scores are: User: ${humanScore}   Computer: ${computerScore}`);
+
+    }
+  }
+   
+playGame();
 
 
+
+
+   
+
+//still need to make inputs case insensitive- step 5.3
 
 
   </script>
 
 </body>
 </html>
-
-
