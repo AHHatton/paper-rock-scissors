@@ -19,64 +19,67 @@
     let num = Math.random();
     let computerInput = "";
     if (num <.32) {
-      computerInput = "Paper";
+      computerInput = "paper";
     } else if (num >.66) {
-      computerInput =  "Rock";
+      computerInput =  "rock";
     } else {
-      computerInput = "Scissors";
+      computerInput = "scissors";
     }
     return computerInput;
    }
 
   
-  //prompts for user to input r/p/s
+//prompts for user to input r/p/s
   function getHumanChoice(){
-    userInput = prompt("Please enter either Paper, Rock, or Scissors");
+    userInput = prompt("Please enter either Paper, Rock, or Scissors").toLowerCase();
     return userInput;
   }
 
-//stuck here- attempts to loop through playRound 5 times and increment scores. playRound works on its own, but not in this loop. Scores are wonky at best.
+
 
   function playGame() {
 
+//declares playRound function which prints round winners and increments scores 
+//directions said to put this inside playGame function, but I think I should be able to declare outside, then call in this function?
     function playRound(humanChoice, computerChoice) {
-      if ((humanChoice === "Paper" && computerChoice === "Rock") || 
-        (humanChoice === "Rock" && computerChoice === "Scissors") ||
-        (humanChoice === "Scissors" && computerChoice === "Paper"))  {
+      if ((humanChoice === "paper" && computerChoice === "rock") || 
+        (humanChoice === "rock" && computerChoice === "scissors") ||
+        (humanChoice === "scissors" && computerChoice === "paper"))  {
         humanScore = humanScore + 1;
-        console.log(`You win! ${humanChoice} beats ${computerChoice}`);
+        console.log(`Round update: You win! ${humanChoice} beats ${computerChoice}`);
       } else if (humanChoice === computerChoice) {
         console.log("It's a draw");
-      }
-      else {
+      } else {
         computerScore = computerScore + 1;
-        console.log(`You lose! ${computerChoice} beats ${humanChoice}`);  
+        console.log(`Round update: You lose! ${computerChoice} beats ${humanChoice}`);  
       }  
-      }
+    }
 
+//uses a for loop to do the following 5 times - get fresh inputs, calls playRound, displays inputs and updated scores
     for (let i = 0; i < 5; i++) {  
-    const humanSelection = getHumanChoice();
+      const humanSelection = getHumanChoice();
       const computerSelection = getComputerChoice();
-          
-  
-  playRound(humanSelection, computerSelection);
-      
+
+      playRound(humanSelection, computerSelection);
 
       console.log(`The user played: ${humanSelection}`);
       console.log(`The computer played: ${computerSelection}`);
       console.log(`The scores are: User: ${humanScore}   Computer: ${computerScore}`);
+    }
 
+//compares scores from 5 rounds, declares a winner
+    if (humanScore > computerScore) {
+      console.log(`Congratulations! You won the game by ${humanScore - computerScore} points!`);
+    } else if (computerScore > humanScore) {
+      console.log(`Sorry, the computer won the game by ${computerScore - humanScore}.`);
+    } else {
+      console.log("It's a tie! Either you both win or you both lose, depending on your perspective");
     }
   }
    
-playGame();
+//calls the playGame function
+  playGame();
 
-
-
-
-   
-
-//still need to make inputs case insensitive- step 5.3
 
 
   </script>
