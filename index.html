@@ -8,32 +8,51 @@
 </head>
 <body>
 
+  <button id="paper">paper</button>
+  <button id="rock">rock</button>
+  <button id="scissors">scissors</button>
+  <button id="lizard">lizard</button>
+  <button id="spock">spock</button>
+
   <script>
    
    //declares score variables at global scope
    let humanScore = 0;
    let computerScore = 0;
 
+    const paperBtn = document.querySelector('#paper');
+    const rockBtn = document.querySelector('#rock');
+    const scissorsBtn = document.querySelector('#scissors');
+    const lizardBtn = document.querySelector('#lizard');
+    const spockBtn = document.querySelector('#spock');
+
+
+
    //uses math.random to pick a random number, then uses  conditional logic to convert it to r/p/s
    function getComputerChoice() {
     let num = Math.random();
     let computerInput = "";
-    if (num <.32) {
+    if (num < .2) {
       computerInput = "paper";
-    } else if (num >.66) {
+    } else if (num < .4) {
       computerInput =  "rock";
-    } else {
+    } else if (num < .6) {
       computerInput = "scissors";
+    } else if (num < .8) {
+      computerInput = "lizard";
+    } else {
+      computerInput = "spock";
     }
     return computerInput;
    }
 
   
 //prompts for user to input r/p/s
-  function getHumanChoice(){
-    userInput = prompt("Please enter either Paper, Rock, or Scissors").toLowerCase();
-    return userInput;
-  }
+ //function getHumanChoice(){
+//    userInput = prompt("Please enter either Paper, Rock, or Scissors").toLowerCase();
+//    return userInput;
+//  }
+
 
 
 
@@ -42,9 +61,13 @@
 //declares playRound function which prints round winners and increments scores 
 //directions said to put this inside playGame function, but I think I should be able to declare outside, then call in this function?
     function playRound(humanChoice, computerChoice) {
-      if ((humanChoice === "paper" && computerChoice === "rock") || 
-        (humanChoice === "rock" && computerChoice === "scissors") ||
-        (humanChoice === "scissors" && computerChoice === "paper"))  {
+      if ((humanChoice === "paper" && computerChoice === "rock" || computerChoice === "spock") || 
+        (humanChoice === "rock" && computerChoice === "scissors" || computerChoice === "lizard") ||
+        (humanChoice === "scissors" && computerChoice === "paper" || computerChoice === "lizard") ||
+        (humanChoice === "lizard" && computerChoice === "paper" || computerChoice === "spock") ||
+        (humanChoice === "spock" && computerChoice ==="scissors" || computerChoice === "rock")
+    )
+        {
         humanScore = humanScore + 1;
         console.log(`Round update: You win! ${humanChoice} beats ${computerChoice}`);
       } else if (humanChoice === computerChoice) {
@@ -55,27 +78,65 @@
       }  
     }
 
-//uses a for loop to do the following 5 times - get fresh inputs, calls playRound, displays inputs and updated scores
-    for (let i = 0; i < 5; i++) {  
-      const humanSelection = getHumanChoice();
-      const computerSelection = getComputerChoice();
+//      const humanSelection = getHumanChoice();
+//      const computerSelection = getComputerChoice();
 
-      playRound(humanSelection, computerSelection);
+//      playRound(humanSelection, computerSelection);
 
-      console.log(`The user played: ${humanSelection}`);
-      console.log(`The computer played: ${computerSelection}`);
+//      console.log(`The user played: ${humanSelection}`);
+//      console.log(`The computer played: ${computerSelection}`);
       console.log(`The scores are: User: ${humanScore}   Computer: ${computerScore}`);
+
+
+//did this below to get the thing working. Next step will be to create this with a 
+
+
+
+      paperBtn.addEventListener('click', function() {
+      playRound ('paper', getComputerChoice());
+    });
+
+
+    rockBtn.addEventListener('click', function() {
+      playRound ('rock', getComputerChoice());
+    });
+
+    scissorsBtn.addEventListener('click', function() {
+      playRound ('scissors', getComputerChoice());
+    });
+
+
+    lizardBtn.addEventListener('click', function() {
+      playRound ('lizard', getComputerChoice());
+    });
+
+
+    spockBtn.addEventListener('click', function() {
+      playRound ('spock', getComputerChoice());
+    });
+
+
+//uses a for loop to do the following 5 times - get fresh inputs, calls playRound, displays inputs and updated scores
+//    for (let i = 0; i < 5; i++) {  
+//      const humanSelection = getHumanChoice();
+//      const computerSelection = getComputerChoice();
+//
+//      playRound(humanSelection, computerSelection);
+//
+//      console.log(`The user played: ${humanSelection}`);
+//      console.log(`The computer played: ${computerSelection}`);
+//      console.log(`The scores are: User: ${humanScore}   Computer: ${computerScore}`);
     }
 
 //compares scores from 5 rounds, declares a winner
-    if (humanScore > computerScore) {
-      console.log(`Congratulations! You won the game by ${humanScore - computerScore} points!`);
-    } else if (computerScore > humanScore) {
-      console.log(`Sorry, the computer won the game by ${computerScore - humanScore}.`);
-    } else {
-      console.log("It's a tie! Either you both win or you both lose, depending on your perspective");
-    }
-  }
+//    if (humanScore > computerScore) {
+ //     console.log(`Congratulations! You won the game by ${humanScore - computerScore} points!`);
+//    } else if (computerScore > humanScore) {
+//      console.log(`Sorry, the computer won the game by ${computerScore - humanScore}.`);
+//    } else {
+//      console.log("It's a tie! Either you both win or you both lose, depending on your perspective");
+//    }
+//  }
    
 //calls the playGame function
   playGame();
