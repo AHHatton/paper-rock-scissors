@@ -61,22 +61,33 @@
 //declares playRound function which prints round winners and increments scores 
 //directions said to put this inside playGame function, but I think I should be able to declare outside, then call in this function?
     function playRound(humanChoice, computerChoice) {
-      if ((humanChoice === "paper" && computerChoice === "rock" || computerChoice === "spock") || 
-        (humanChoice === "rock" && computerChoice === "scissors" || computerChoice === "lizard") ||
-        (humanChoice === "scissors" && computerChoice === "paper" || computerChoice === "lizard") ||
-        (humanChoice === "lizard" && computerChoice === "paper" || computerChoice === "spock") ||
-        (humanChoice === "spock" && computerChoice ==="scissors" || computerChoice === "rock")
-    )
-        {
-        humanScore = humanScore + 1;
-        console.log(`Round update: You win! ${humanChoice} beats ${computerChoice}`);
-      } else if (humanChoice === computerChoice) {
-        console.log("It's a draw");
-      } else {
-        computerScore = computerScore + 1;
-        console.log(`Round update: You lose! ${computerChoice} beats ${humanChoice}`);  
-      }  
-    }
+      if (humanChoice === computerChoice) {
+        console.log(`You chose ${humanChoice}. The computer chose ${computerChoice}`);
+        console.log("It's a draw"); 
+      } else if 
+        ((humanChoice === "paper" && (computerChoice === "rock" || computerChoice === "spock")) || 
+        (humanChoice === "rock" && (computerChoice === "scissors" || computerChoice === "lizard")) ||
+        (humanChoice === "scissors" && (computerChoice === "paper" || computerChoice === "lizard")) ||
+        (humanChoice === "lizard" && (computerChoice === "paper" || computerChoice === "spock")) ||
+        (humanChoice === "spock" && (computerChoice ==="scissors" || computerChoice === "rock"))
+        )
+         {
+         humanScore = humanScore + 1;
+         console.log(`You chose ${humanChoice}. The computer chose ${computerChoice}`);
+         console.log(`Round update: You win! ${humanChoice} beats ${computerChoice}`);
+      } else if 
+        ((humanChoice === "paper" && (computerChoice === "scissors" || computerChoice === "lizard")) || 
+        (humanChoice === "rock" && (computerChoice === "paper" || computerChoice === "spock")) ||
+        (humanChoice === "scissors" && (computerChoice === "rock" || computerChoice === "spock")) ||
+        (humanChoice === "lizard" && (computerChoice === "rock" || computerChoice === "scissors")) ||
+        (humanChoice === "spock" && (computerChoice ==="paper" || computerChoice === "lizard"))
+        )
+         {
+         computerScore = computerScore + 1;
+         console.log(`You totally chose ${humanChoice}. The computer chose ${computerChoice}`);
+         console.log(`Round update: You lose! ${computerChoice} beats ${humanChoice}`);  
+         }  
+      }
 
 //      const humanSelection = getHumanChoice();
 //      const computerSelection = getComputerChoice();
@@ -88,8 +99,7 @@
       console.log(`The scores are: User: ${humanScore}   Computer: ${computerScore}`);
 
 
-//did this below to get the thing working. Next step will be to create this with a 
-
+//did this below to get the thing working. Next step will be to create this with a forEach loop
 
 
       paperBtn.addEventListener('click', function() {
