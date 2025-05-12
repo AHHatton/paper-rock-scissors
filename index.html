@@ -7,12 +7,15 @@
   <!-- alternate option to include JS in separate script <script src="javascript.js"></script> -->
 </head>
 <body>
-
+  <h1>Make your choice by clicking one of these here buttons</h1>
   <button id="paper">paper</button>
   <button id="rock">rock</button>
   <button id="scissors">scissors</button>
   <button id="lizard">lizard</button>
   <button id="spock">spock</button>
+  <div id="scores">
+
+  </div>
 
   <script>
    
@@ -26,7 +29,8 @@
     const lizardBtn = document.querySelector('#lizard');
     const spockBtn = document.querySelector('#spock');
 
-
+    const scoreDiv = document.querySelector('#scores');
+    
 
    //uses math.random to pick a random number, then uses  conditional logic to convert it to r/p/s
    function getComputerChoice() {
@@ -62,8 +66,8 @@
 //directions said to put this inside playGame function, but I think I should be able to declare outside, then call in this function?
     function playRound(humanChoice, computerChoice) {
       if (humanChoice === computerChoice) {
-        console.log(`You chose ${humanChoice}. The computer chose ${computerChoice}`);
-        console.log("It's a draw"); 
+        scoreDiv.textContent = `You chose ${humanChoice}. The computer chose ${computerChoice}. \n *It's a draw*`;
+        
       } else if 
         ((humanChoice === "paper" && (computerChoice === "rock" || computerChoice === "spock")) || 
         (humanChoice === "rock" && (computerChoice === "scissors" || computerChoice === "lizard")) ||
@@ -73,8 +77,8 @@
         )
          {
          humanScore = humanScore + 1;
-         console.log(`You chose ${humanChoice}. The computer chose ${computerChoice}`);
-         console.log(`Round update: You win! ${humanChoice} beats ${computerChoice}`);
+         scoreDiv.textContent = `You chose ${humanChoice}. The computer chose ${computerChoice}. *You win!* ${humanChoice} beats ${computerChoice}.`
+         
       } else if 
         ((humanChoice === "paper" && (computerChoice === "scissors" || computerChoice === "lizard")) || 
         (humanChoice === "rock" && (computerChoice === "paper" || computerChoice === "spock")) ||
@@ -84,8 +88,8 @@
         )
          {
          computerScore = computerScore + 1;
-         console.log(`You totally chose ${humanChoice}. The computer chose ${computerChoice}`);
-         console.log(`Round update: You lose! ${computerChoice} beats ${humanChoice}`);  
+         scoreDiv.textContent = `You chose ${humanChoice}. The computer chose ${computerChoice}. *You lose!* ${computerChoice} beats ${humanChoice}.`;
+         
          }  
       }
 
