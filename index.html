@@ -13,9 +13,8 @@
   <button id="scissors">scissors</button>
   <button id="lizard">lizard</button>
   <button id="spock">spock</button>
-  <div id="scores">
+  <div id="container"></div>
 
-  </div>
 
   <script>
    
@@ -28,9 +27,15 @@
     const scissorsBtn = document.querySelector('#scissors');
     const lizardBtn = document.querySelector('#lizard');
     const spockBtn = document.querySelector('#spock');
-
-    const scoreDiv = document.querySelector('#scores');
+    const container = document.querySelector('#container');
+    //const roundDiv = document.createElement('div');
+//    container.appendChild(addP);
     
+
+    function displayScore() {
+      
+      
+    };
 
    //uses math.random to pick a random number, then uses  conditional logic to convert it to r/p/s
    function getComputerChoice() {
@@ -51,23 +56,18 @@
    }
 
   
-//prompts for user to input r/p/s
- //function getHumanChoice(){
-//    userInput = prompt("Please enter either Paper, Rock, or Scissors").toLowerCase();
-//    return userInput;
-//  }
-
-
-
-
   function playGame() {
 
 //declares playRound function which prints round winners and increments scores 
 //directions said to put this inside playGame function, but I think I should be able to declare outside, then call in this function?
     function playRound(humanChoice, computerChoice) {
       if (humanChoice === computerChoice) {
-        scoreDiv.textContent = `You chose ${humanChoice}. The computer chose ${computerChoice}. \n *It's a draw*`;
-        
+        const addP = document.createElement('p');  
+        addP.textContent = `You chose ${humanChoice}. The computer chose ${computerChoice}. *It's a draw* 
+      
+        The scores are: User: ${humanScore}   Computer: ${computerScore}`;
+        container.appendChild(addP);
+        //container.appendChild(roundDiv);
       } else if 
         ((humanChoice === "paper" && (computerChoice === "rock" || computerChoice === "spock")) || 
         (humanChoice === "rock" && (computerChoice === "scissors" || computerChoice === "lizard")) ||
@@ -77,8 +77,11 @@
         )
          {
          humanScore = humanScore + 1;
-         scoreDiv.textContent = `You chose ${humanChoice}. The computer chose ${computerChoice}. *You win!* ${humanChoice} beats ${computerChoice}.`
-         
+         const addP = document.createElement('p');  
+         addP.textContent = `You chose ${humanChoice}. The computer chose ${computerChoice}. *You win!* ${humanChoice} beats ${computerChoice}. 
+         The scores are: User: ${humanScore}   Computer: ${computerScore}`;
+         container.appendChild(addP);
+         //container.appendChild(roundDiv);
       } else if 
         ((humanChoice === "paper" && (computerChoice === "scissors" || computerChoice === "lizard")) || 
         (humanChoice === "rock" && (computerChoice === "paper" || computerChoice === "spock")) ||
@@ -88,8 +91,11 @@
         )
          {
          computerScore = computerScore + 1;
-         scoreDiv.textContent = `You chose ${humanChoice}. The computer chose ${computerChoice}. *You lose!* ${computerChoice} beats ${humanChoice}.`;
-         
+         const addP = document.createElement('p');  
+         addP.textContent = `You chose ${humanChoice}. The computer chose ${computerChoice}. *You lose!* ${computerChoice} beats ${humanChoice}. 
+         The scores are: User: ${humanScore}   Computer: ${computerScore}\n`;
+         container.appendChild(addP);
+         //container.appendChild(roundDiv);
          }  
       }
 
@@ -98,9 +104,6 @@
 
 //      playRound(humanSelection, computerSelection);
 
-//      console.log(`The user played: ${humanSelection}`);
-//      console.log(`The computer played: ${computerSelection}`);
-      console.log(`The scores are: User: ${humanScore}   Computer: ${computerScore}`);
 
 
 //did this below to get the thing working. Next step will be to create this with a forEach loop
