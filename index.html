@@ -21,6 +21,7 @@
    //declares score variables at global scope
    let humanScore = 0;
    let computerScore = 0;
+   
 
     const paperBtn = document.querySelector('#paper');
     const rockBtn = document.querySelector('#rock');
@@ -28,16 +29,21 @@
     const lizardBtn = document.querySelector('#lizard');
     const spockBtn = document.querySelector('#spock');
     const container = document.querySelector('#container');
-    //const roundDiv = document.createElement('div');
-//    container.appendChild(addP);
+    const addP = document.createElement('p');  
     
+    
+    //const buttons = document.querySelectorAll('button');
 
-    function displayScore() {
-      
-      
-    };
 
-   //uses math.random to pick a random number, then uses  conditional logic to convert it to r/p/s
+//can I use a forEach loop to assign the button id to humanChoice variable? I can alert, but not assign  . if so, declare humanChoice variable up above
+ //   buttons.forEach((button) => {
+ //     button.addEventListener("click", () => {
+       //alert(button.id);
+ //        humanChoice = (button.id);
+ //     });
+ //   }); 
+
+   //uses math.random to pick a random number, then uses  conditional logic to convert it to r/p/s/l/s
    function getComputerChoice() {
     let num = Math.random();
     let computerInput = "";
@@ -55,6 +61,10 @@
     return computerInput;
    }
 
+   function checkScores() {
+   
+   }
+
   
   function playGame() {
 
@@ -63,11 +73,11 @@
     function playRound(humanChoice, computerChoice) {
       if (humanChoice === computerChoice) {
         const addP = document.createElement('p');  
-        addP.textContent = `You chose ${humanChoice}. The computer chose ${computerChoice}. *It's a draw* 
+        addP.textContent += `You chose ${humanChoice}. The computer chose ${computerChoice}. *It's a draw* 
       
         The scores are: User: ${humanScore}   Computer: ${computerScore}`;
         container.appendChild(addP);
-        //container.appendChild(roundDiv);
+   
       } else if 
         ((humanChoice === "paper" && (computerChoice === "rock" || computerChoice === "spock")) || 
         (humanChoice === "rock" && (computerChoice === "scissors" || computerChoice === "lizard")) ||
@@ -77,11 +87,11 @@
         )
          {
          humanScore = humanScore + 1;
-         const addP = document.createElement('p');  
-         addP.textContent = `You chose ${humanChoice}. The computer chose ${computerChoice}. *You win!* ${humanChoice} beats ${computerChoice}. 
+        const addP = document.createElement('p');  
+         addP.textContent += `You chose ${humanChoice}. The computer chose ${computerChoice}. *You win!* ${humanChoice} beats ${computerChoice}. 
          The scores are: User: ${humanScore}   Computer: ${computerScore}`;
          container.appendChild(addP);
-         //container.appendChild(roundDiv);
+   
       } else if 
         ((humanChoice === "paper" && (computerChoice === "scissors" || computerChoice === "lizard")) || 
         (humanChoice === "rock" && (computerChoice === "paper" || computerChoice === "spock")) ||
@@ -92,13 +102,26 @@
          {
          computerScore = computerScore + 1;
          const addP = document.createElement('p');  
-         addP.textContent = `You chose ${humanChoice}. The computer chose ${computerChoice}. *You lose!* ${computerChoice} beats ${humanChoice}. 
+         addP.textContent += `You chose ${humanChoice}. The computer chose ${computerChoice}. *You lose!* ${computerChoice} beats ${humanChoice}. 
          The scores are: User: ${humanScore}   Computer: ${computerScore}\n`;
          container.appendChild(addP);
-         //container.appendChild(roundDiv);
+   
          }  
-      }
+         const addP = document.createElement('p');  
+        
 
+         if (computerScore === 5) {
+        addP.textContent = `Sorry human. The computer won today by ${computerScore - humanScore} points.`;
+      } else if (humanScore === 5) {
+        addP.textContent = `Congratulations human! You beat the computer by ${humanScore - computerScore} points!`;
+      }
+      container.appendChild(addP);
+   
+      }
+   
+
+
+  
 //      const humanSelection = getHumanChoice();
 //      const computerSelection = getComputerChoice();
 
@@ -109,42 +132,44 @@
 //did this below to get the thing working. Next step will be to create this with a forEach loop
 
 
-      paperBtn.addEventListener('click', function() {
-      playRound ('paper', getComputerChoice());
-    });
+paperBtn.addEventListener('click', function() {
+  playRound('paper', getComputerChoice());
+});
 
 
-    rockBtn.addEventListener('click', function() {
-      playRound ('rock', getComputerChoice());
-    });
+rockBtn.addEventListener('click', function() {
+  playRound('rock', getComputerChoice());
+});
 
-    scissorsBtn.addEventListener('click', function() {
-      playRound ('scissors', getComputerChoice());
-    });
-
-
-    lizardBtn.addEventListener('click', function() {
-      playRound ('lizard', getComputerChoice());
-    });
+scissorsBtn.addEventListener('click', function() {
+  playRound('scissors', getComputerChoice());
+});
 
 
-    spockBtn.addEventListener('click', function() {
-      playRound ('spock', getComputerChoice());
-    });
+lizardBtn.addEventListener('click', function() {
+  playRound('lizard', getComputerChoice());
+});
 
+
+spockBtn.addEventListener('click', function() {
+  playRound('spock', getComputerChoice());
+});
+
+};
 
 //uses a for loop to do the following 5 times - get fresh inputs, calls playRound, displays inputs and updated scores
 //    for (let i = 0; i < 5; i++) {  
-//      const humanSelection = getHumanChoice();
+      
+//      const humanSelection = humanChoice;
 //      const computerSelection = getComputerChoice();
-//
+
 //      playRound(humanSelection, computerSelection);
-//
+
 //      console.log(`The user played: ${humanSelection}`);
 //      console.log(`The computer played: ${computerSelection}`);
 //      console.log(`The scores are: User: ${humanScore}   Computer: ${computerScore}`);
-    }
-
+//    }
+//  }
 //compares scores from 5 rounds, declares a winner
 //    if (humanScore > computerScore) {
  //     console.log(`Congratulations! You won the game by ${humanScore - computerScore} points!`);
@@ -154,7 +179,6 @@
 //      console.log("It's a tie! Either you both win or you both lose, depending on your perspective");
 //    }
 //  }
-   
 //calls the playGame function
   playGame();
 
